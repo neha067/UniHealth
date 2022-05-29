@@ -1,0 +1,10 @@
+pivot -> 5
+Swapping 3 and 3
+Swapping 4 and 7
+Swapping 5 and 7
+pivot index -> 2
+pivot -> 4
+Swapping 3 and 3
+Swapping 4 and 4
+pivot index -> 1
+4
