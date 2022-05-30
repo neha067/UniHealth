@@ -1,5 +1,6 @@
 from email import message
 from multiprocessing import context
+from django.db import models
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -60,5 +61,25 @@ def signup(request):
 
         messages.success(request,"Your account has been successfully created!")
 
-        return redirect('login')
+        return redirect('signin')
     return render(request, 'signup.html') 
+
+def addStudent(request):
+    
+    # if request.method =="POST":
+    #     studentName= request.POST['name']
+    #     regNo = request.POST['regNo']
+    #     email= request.POST['email']
+    #     phone= request.POST['phone']
+    #     address= request.POST['address']
+    #     age= request.POST['age']
+    #     gender = request.POST['gender']
+    #     dob = request.POST['dob']
+
+
+
+
+
+
+
+    return render(request,'addStudent.html')
