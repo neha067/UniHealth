@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [    #URL dispatching.....
     path('', views.index, name='index'),  #calls the index function from view
     path('index',views.index, name= 'index'),  #calls about function from view
-    path('login',views.login, name= 'login'),
+    path('signin',views.signin, name= 'signin'),
     path('signup',views.signup, name= 'signup')
 ]

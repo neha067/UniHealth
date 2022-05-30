@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login
 def index(request):
     
     return render(request,'index.html')
@@ -13,20 +13,20 @@ def index(request):
 def about(request):
     return HttpResponse("this is about....")
 
-def login(request):
+def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
         
         user = authenticate(username=username, password=pass1) #inbuilt function
         if user is not None:
-            login(request)
+            login(request,user)
             # messages.success(request, "Logged In Sucessfully!!")
             return render(request, "index.html")
         else:
             messages.error(request, "Bad Credentials!!")
-            return redirect('app')
-    return render(request, 'login.html') #context is sent to html doc....
+            return redirect('/app/index')
+    return render(request, 'signin.html') #context is sent to html doc....
 
 def signup(request):
     if request.method =="POST":
@@ -34,6 +34,26 @@ def signup(request):
         email= request.POST['email']
         pass1= request.POST['pass1']
         pass2= request.POST['pass2']
+        #applying constraints error... doesn't work :3
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exist! Please try some other username.")
+            return redirect('/app/index')
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email Already Registered!!")
+            return redirect('/app/index')
+        
+        if len(username)>20:
+            messages.error(request, "Username must be under 20 charcters!!")
+            return redirect('/app/index')
+        
+        if pass1 != pass2:
+            messages.error(request, "Passwords didn't matched!!")
+            return redirect('/app/index')
+        
+        if not username.isalnum():
+            messages.error(request, "Username must be Alpha-Numeric!!")
+            return redirect('/app/index')
 
         myuser = User.objects.create_user(username,email,pass1)
         myuser.save()
