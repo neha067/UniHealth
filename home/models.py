@@ -11,6 +11,16 @@ class StudentDetails(models.Model):
     gender = models.CharField( max_length=10)
     dob = models.DateField()
 
+class DoctorDetails(models.Model):
+    d_id=models.CharField(max_length=10,unique=True)
+    d_name=models.CharField(max_length=20)
+    specialization=models.CharField(max_length=40)
+    experience=models.CharField(max_length=40)
+    phone = models.IntegerField()
+    email = models.EmailField()
+    gender = models.CharField( max_length=10)
+    age = models.IntegerField()
+
 
 
 
