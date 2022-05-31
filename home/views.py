@@ -6,14 +6,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
-from .forms import StudentForm
+from .forms import StudentForm,DoctorForm
 def index(request):
     
     return render(request,'index.html')
 # Create your views here.
-
-def about(request):
-    return HttpResponse("this is about....")
 
 def signin(request):
     if request.method == 'POST':
@@ -67,10 +64,21 @@ def signup(request):
 
 def addStudent(request):
     if request.method =="POST":
-        print(request.POST  )
         form = StudentForm(request.POST or None)
         if form.is_valid():
             form.save()
         return render(request,'addStudent.html')
     else:
         return render(request,'addStudent.html')
+
+def addDoctor(request):
+    if request.method =="POST":
+        form = DoctorForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        return render(request,'addDoctor.html')
+    else:
+        return render(request,'addDoctor.html')
+
+def editStudent(request):
+    return render(request,'editStudent.html')

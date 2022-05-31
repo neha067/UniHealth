@@ -4,7 +4,7 @@
 <div class="container mt-0">
   <div class="row breadcrumb-bar">
     <div class="col-md-6">
-      <h3 class="block-title">Add Student</h3>
+      <h3 class="block-title">Add Doctor</h3>
     </div>
     <div class="col-md-6">
       <ol class="breadcrumb">
@@ -13,8 +13,8 @@
             <span class="ti-home"></span>
           </a>
         </li>
-        <li class="breadcrumb-item">Student</li>
-        <li class="breadcrumb-item active">Add Student</li>
+        <li class="breadcrumb-item">Doctor</li>
+        <li class="breadcrumb-item active">Add Doctor</li>
       </ol>
     </div>
   </div>
@@ -28,28 +28,48 @@
     <!-- Widget Item -->
     <div class="col-md-12">
       <div class="widget-area-2 proclinic-box-shadow">
-        <h3 class="widget-title">Add Student</h3>
-        <form method="POST" action="/app/addStudent">
-          {% csrf_token %}
+        <h3 class="widget-title">Add Doctor</h3>
+        <form method="POST" action="/app/addDoctor">
+          {% csrf_token%}
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="patient-name">Student Name</label>
+              <label for="Doctor-name">Doctor Name</label>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Student name"
-                id="student-name"
-                name="s_name"
+                placeholder="Doctor name"
+                id="Doctor-name"
+                name="d_name"
               />
             </div>
             <div class="form-group col-md-6">
-              <label for="dob">Date Of Birth</label>
+              <label for="dob">Registration Id</label>
               <input
-                type="date"
-                placeholder="Date of Birth"
+                type="text"
+                placeholder="Registration Id"
                 class="form-control"
-                id="dob"
-                name="dob"
+                id="Registration Id"
+                name="d_id"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="specialization">Specialization</label>
+              <input
+                type="text"
+                placeholder="Specialization"
+                class="form-control"
+                id="specialization"
+                name="specialization"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="experience">Experience</label>
+              <input
+                type="text"
+                placeholder="Experience"
+                class="form-control"
+                id="experience"
+                name="experience"
               />
             </div>
             <div class="form-group col-md-6">
@@ -69,7 +89,7 @@
                 placeholder="Phone"
                 class="form-control"
                 id="phone"
-                name="s_phone"
+                name="phone"
               />
             </div>
             <div class="form-group col-md-6">
@@ -78,8 +98,8 @@
                 type="email"
                 placeholder="email"
                 class="form-control"
-                id="email"
-                name="s_email"
+                id="Email"
+                name="email"
               />
             </div>
             <div class="form-group col-md-6">
@@ -89,26 +109,6 @@
                 <option>Female</option>
                 <option>Other</option>
               </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="email">Registration Number</label>
-              <input
-                type="text"
-                placeholder="Registration Number"
-                class="form-control"
-                id="regNo"
-                name="regNo"
-              />
-            </div>
-            <div class="form-group col-md-12">
-              <label for="exampleFormControlTextarea1">Address</label>
-              <textarea
-                placeholder="Hostel Name and Room No."
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                name="address"
-              ></textarea>
             </div>
 
             <div class="form-group col-md-6 mb-3">

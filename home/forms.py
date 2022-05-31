@@ -1,7 +1,7 @@
 from dataclasses import field
 from django.forms import ModelForm
 # from django import forms
-from .models import StudentDetails, DoctorDetails
+from .models import StudentDetails,DoctorDetails
 
 class StudentForm(ModelForm):
     class Meta:
@@ -11,4 +11,4 @@ class StudentForm(ModelForm):
 class DoctorForm(ModelForm):
     class Meta:
         model=DoctorDetails
-        field=['d_id','d_name','specialization','experience','email','phone','gender','age']
+        fields=['d_id','d_name','specialization','experience','email','phone','gender','age']
