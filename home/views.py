@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
+from .forms import StudentForm
 def index(request):
     
     return render(request,'index.html')
@@ -75,11 +76,10 @@ def addStudent(request):
     #     age= request.POST['age']
     #     gender = request.POST['gender']
     #     dob = request.POST['dob']
-
-
-
-
-
-
-
-    return render(request,'addStudent.html')
+    if request.method =="POST":
+        form = StudentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        return render(request,'addStudent.html')
+    else:
+        return render(request,'addStudent.html')
