@@ -70,7 +70,7 @@
           <nav class="navbar navbar-default">
             <div class="navbar-header">
               <div class="sidebar-header">
-                <a href="index.html"></a>
+                <a href="/app"><span class="ti-home"></span> HOME </a>
               </div>
             </div>
             <ul class="nav justify-content-end">
@@ -129,6 +129,7 @@
                   </div>
                 </div>
               </li>
+              {% comment %}
               <li class="nav-item">
                 <a
                   class="nav-link dropdown-toggle"
@@ -158,6 +159,7 @@
                   >
                 </div>
               </li>
+              {% endcomment %} {% comment %}
               <li class="nav-item">
                 <a
                   class="nav-link dropdown-toggle"
@@ -184,6 +186,7 @@
                   >
                 </div>
               </li>
+              {% endcomment %}
             </ul>
           </nav>
         </div>
@@ -205,16 +208,19 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+                {% comment %}
                 <li class="nav-item dropdown active">
                   <a
                     class="nav-link dropdown-toggle"
                     data-toggle="dropdown"
-                    href="#"
+                    href="/app"
                     role="button"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    ><span class="ti-home"></span> Dashboard</a
                   >
+                    <span class="ti-home"></span> HOME</a
+                  >
+                  {% endcomment %} {% comment %}
                   <div class="dropdown-menu">
                     <a
                       class="dropdown-item"
@@ -228,6 +234,7 @@
                     >
                     <a class="dropdown-item" href="index.html">Horizantal</a>
                   </div>
+                  {% endcomment %}
                 </li>
                 <li class="nav-item dropdown">
                   <a
@@ -403,16 +410,11 @@
                     role="button"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    ><span class="ti-file"></span> SignIn/SignUp</a
+                    ><span class="ti-user"></span> User</a
                   >
                   <div class="dropdown-menu">
                     <a class="dropdown-item" href="/app/signin">Sign In </a>
                     <a class="dropdown-item" href="/app/signup">Sign Up</a>
-                    <a class="dropdown-item" href="404.html">404</a>
-                    <a class="dropdown-item" href="blank-page.html"
-                      >Blank Page</a
-                    >
-                    <a class="dropdown-item" href="pricing.html">Pricing</a>
                     <a class="dropdown-item" href="faq.html">FAQ</a>
                     <a class="dropdown-item" href="invoice.html">Invoice</a>
                   </div>
