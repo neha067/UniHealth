@@ -66,17 +66,8 @@ def signup(request):
     return render(request, 'signup.html') 
 
 def addStudent(request):
-    
-    # if request.method =="POST":
-    #     studentName= request.POST['name']
-    #     regNo = request.POST['regNo']
-    #     email= request.POST['email']
-    #     phone= request.POST['phone']
-    #     address= request.POST['address']
-    #     age= request.POST['age']
-    #     gender = request.POST['gender']
-    #     dob = request.POST['dob']
     if request.method =="POST":
+        print(request.POST  )
         form = StudentForm(request.POST or None)
         if form.is_valid():
             form.save()
