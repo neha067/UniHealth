@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from .forms import StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails
 def index(request):
     
     return render(request,'index.html')
@@ -82,3 +83,11 @@ def addDoctor(request):
 
 def editStudent(request):
     return render(request,'editStudent.html')
+
+def allStudent(request):
+    all_student = StudentDetails.objects.all
+    return render(request,'allStudent.html',{'all' : all_student})
+
+def allDoctor(request):
+    all_doc = DoctorDetails.objects.all
+    return render(request,'allDoctor.html',{'all' : all_doc})

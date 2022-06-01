@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Breadcrumb -->
+<!-- Page Title -->
+<div class="container mt-0">
+  <div class="row breadcrumb-bar">
+    <div class="col-md-6">
+      <h3 class="block-title">Students</h3>
+    </div>
+    <div class="col-md-6">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">
+            <span class="ti-home"></span>
+          </a>
+        </li>
+        <li class="breadcrumb-item">Students</li>
+        <li class="breadcrumb-item active">All Students</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<!-- /Page Title -->
+
+<!-- /Breadcrumb -->
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <!-- Widget Item -->
+    <div class="col-md-12">
+      <div class="widget-area-2 proclinic-box-shadow">
+        <h3 class="widget-title">Students List</h3>
+        <div class="table-responsive mb-3">
+          <table id="tableId" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="no-sort">
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      class="custom-control-input"
+                      type="checkbox"
+                      id="select-all"
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="select-all"
+                    ></label>
+                  </div>
+                </th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>DOB</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in all %}
+              <tr>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      class="custom-control-input"
+                      type="checkbox"
+                      id="11"
+                    />
+                    <label class="custom-control-label" for="11"></label>
+                  </div>
+                </td>
+                <td>{{item.regNo}}</td>
+                <td>{{item.s_name}}</td>
+                <td>{{item.s_phone}}</td>
+                <td>{{item.s_email}}</td>
+                <td>{{item.address}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.dob}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!--Export links-->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center export-pagination">
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  ><span class="ti-download"></span> csv</a
+                >
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  ><span class="ti-printer"></span> print</a
+                >
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  ><span class="ti-file"></span> PDF</a
+                >
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  ><span class="ti-align-justify"></span> Excel</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <!-- /Export links-->
+          <button type="button" class="btn btn-danger mt-3 mb-0">
+            <span class="ti-trash"></span> DELETE
+          </button>
+          <button type="button" class="btn btn-primary mt-3 mb-0">
+            <span class="ti-pencil-alt"></span> EDIT
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /Widget Item -->
+  </div>
+</div>
+<!-- /Main Content -->
+{% endblock %}
