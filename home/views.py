@@ -1,17 +1,17 @@
 from email import message
 from multiprocessing import context
+from django.db import models
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
+from .forms import StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails
 def index(request):
     
     return render(request,'index.html')
 # Create your views here.
-
-def about(request):
-    return HttpResponse("this is about....")
 
 def signin(request):
     if request.method == 'POST':
@@ -60,5 +60,37 @@ def signup(request):
 
         messages.success(request,"Your account has been successfully created!")
 
-        return redirect('login')
+        return redirect('signin')
     return render(request, 'signup.html') 
+
+def addStudent(request):
+    if request.method =="POST":
+        form = StudentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Student added successfully !')
+        else:     
+            messages.error(request,'Enter valid details !')
+        return render(request,'addStudent.html')
+    else:
+        return render(request,'addStudent.html')
+
+def addDoctor(request):
+    if request.method =="POST":
+        form = DoctorForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        return render(request,'addDoctor.html')
+    else:
+        return render(request,'addDoctor.html')
+
+def editStudent(request):
+    return render(request,'editStudent.html')
+
+def allStudent(request):
+    all_student = StudentDetails.objects.all
+    return render(request,'allStudent.html',{'all' : all_student})
+
+def allDoctor(request):
+    all_doc = DoctorDetails.objects.all
+    return render(request,'allDoctor.html',{'all' : all_doc})
