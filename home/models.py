@@ -12,7 +12,7 @@ class StudentDetails(models.Model):
     dob = models.DateField()
 
 class DoctorDetails(models.Model):
-    d_id=models.CharField(max_length=10,unique=True)
+    d_id=models.IntegerField(unique=True)
     d_name=models.CharField(max_length=20)
     specialization=models.CharField(max_length=40)
     experience=models.CharField(max_length=40)

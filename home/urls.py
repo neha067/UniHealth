@@ -11,5 +11,6 @@ urlpatterns = [    #URL dispatching.....
     path('allStudent',views.allStudent, name= 'allStudent'),
     path('allDoctor',views.allDoctor, name= 'allDoctor'),
     path('editStudent',views.editStudent, name= 'editStudent'),
-    path('deleteStudent/<int:regNo>',views.deleteStudent, name= 'deleteStudent')
+    path('deleteStudent/<int:regNo>',views.deleteStudent, name= 'deleteStudent'),
+    path('deleteDoctor/<int:d_id>',views.deleteDoctor, name= 'deleteDoctor')
 ]
