@@ -68,6 +68,9 @@ def addStudent(request):
         form = StudentForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request,'Student added successfully !')
+        else:     
+            messages.error(request,'Enter valid details !')
         return render(request,'addStudent.html')
     else:
         return render(request,'addStudent.html')
