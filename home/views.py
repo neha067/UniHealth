@@ -2,10 +2,11 @@ from email import message
 from multiprocessing import context
 from django.db import models
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
+from django.urls import reverse
 from .forms import StudentForm,DoctorForm
 from .models import DoctorDetails, StudentDetails
 def index(request):
@@ -94,3 +95,11 @@ def allStudent(request):
 def allDoctor(request):
     all_doc = DoctorDetails.objects.all
     return render(request,'allDoctor.html',{'all' : all_doc})
+
+def deleteStudent(request,regNo):
+    print(regNo)
+    member = StudentDetails.objects.get(regNo=regNo)
+    member.delete()
+    #return render(request,'allStudent.html')
+    return render(request,'allStudent.html')
+    # return HttpResponse(reverse('index'))

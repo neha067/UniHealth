@@ -54,6 +54,7 @@
                 <th>Age</th>
                 <th>Gender</th>
                 <th>DOB</th>
+                <th>Delete/Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -77,6 +78,9 @@
                 <td>{{item.age}}</td>
                 <td>{{item.gender}}</td>
                 <td>{{item.dob}}</td>
+                <td>
+                  <a href="{% url 'deleteStudent' item.regNo %}">Delete</a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
