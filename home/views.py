@@ -25,7 +25,7 @@ def signin(request):
             return render(request, "index.html")
         else:
             messages.error(request, "Bad Credentials!!")
-            return redirect('/app/index')
+            return redirect('/app/signin')
     return render(request, 'signin.html') #context is sent to html doc....
 
 def signup(request):
