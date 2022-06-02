@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate,login
 from django.urls import reverse
 from .forms import StudentForm,DoctorForm
 from .models import DoctorDetails, StudentDetails
+from django.template import loader
 def index(request):
     
     return render(request,'index.html')
@@ -100,6 +101,28 @@ def deleteStudent(request,regNo):
     print(regNo)
     member = StudentDetails.objects.get(regNo=regNo)
     member.delete()
-    #return render(request,'allStudent.html')
     return render(request,'allStudent.html')
-    # return HttpResponse(reverse('index'))
+
+
+def updateStudent(request,regNo):
+    member = StudentDetails.objects.get(regNo=regNo)
+    template = loader.get_template('updateStudent.html')
+    context = {
+        'mymember': member,
+    }
+    return HttpResponse(template.render(context, request))
+
+def updaterecord(request, regNo):
+    StudentDetails.s_name = request.POST['s_name']
+    StudentDetails.s_phone = request.POST['s_phone']
+    StudentDetails.regNo = request.POST['regNo']
+    StudentDetails.address = request.POST['address']
+    StudentDetails.age = request.POST['age']
+    StudentDetails.gender = request.POST['gender']
+    StudentDetails.dob = request.POST['dob']
+    StudentDetails.address = request.POST['address']
+    member = StudentDetails.objects.get(regNo=regNo)
+    # member.firstname = first
+    # member.lastname = last
+    member.save()
+    return render(request,'allStudent.html')

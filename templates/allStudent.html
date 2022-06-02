@@ -80,6 +80,7 @@
                 <td>{{item.dob}}</td>
                 <td>
                   <a href="{% url 'deleteStudent' item.regNo %}">Delete</a>
+                  <a href="{% url 'updateStudent' item.regNo %}">Update</a>
                 </td>
               </tr>
               {% endfor %}
