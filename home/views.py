@@ -103,26 +103,69 @@ def deleteStudent(request,regNo):
     member.delete()
     return render(request,'allStudent.html')
 
+def deleteDoctor(request,d_id):
+    member = DoctorDetails.objects.get(d_id=d_id)
+    member.delete()
+    return render(request,'allDoctor.html')
+
 
 def updateStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
-    template = loader.get_template('updateStudent.html')
-    context = {
-        'mymember': member,
-    }
-    return HttpResponse(template.render(context, request))
+    # template = loader.get_template('updateStudent.html')
+    # context = {
+    #     'mymember': member,
+    # }
+    # return HttpResponse(template.render(context, request))
+    return render(request,'updateStudent.html',{'mymember':member})
+
+
+def updateDoctor(request,d_id):
+    member = DoctorDetails.objects.get(d_id=d_id)
+    # template = loader.get_template('updateStudent.html')
+    # context = {
+    #     'mymember': member,
+    # }
+    # return HttpResponse(template.render(context, request))
+    return render(request,'updateDoctor.html',{'mymember':member})
+
 
 def updaterecord(request, regNo):
-    StudentDetails.s_name = request.POST['s_name']
-    StudentDetails.s_phone = request.POST['s_phone']
-    StudentDetails.regNo = request.POST['regNo']
-    StudentDetails.address = request.POST['address']
-    StudentDetails.age = request.POST['age']
-    StudentDetails.gender = request.POST['gender']
-    StudentDetails.dob = request.POST['dob']
-    StudentDetails.address = request.POST['address']
+    s_name = request.POST['s_name']
+    s_phone = request.POST['s_phone']
+    sregNo = request.POST['regNo']
+    address = request.POST['address']
+    age = request.POST['age']
+    gender = request.POST['gender']
+    dob = request.POST['dob']
+    address = request.POST['address']
     member = StudentDetails.objects.get(regNo=regNo)
-    # member.firstname = first
-    # member.lastname = last
+    member.s_name = s_name
+    member.s_phone = s_phone
+    member.regNo = sregNo
+    member.address = address
+    member.age = age
+    member.gender = gender
+    member.dob = dob
     member.save()
-    return render(request,'allStudent.html')
+    return HttpResponseRedirect(reverse('allStudent'))
+
+def updateDrecord(request, d_id):
+    d_name = request.POST['d_name']
+    phone = request.POST['phone']
+    d_id = request.POST['d_id']
+    specialization = request.POST['specialization']
+    age = request.POST['age']
+    gender = request.POST['gender']
+    experience = request.POST['experience']
+    email = request.POST['email']
+    member = DoctorDetails.objects.get(d_id=d_id)
+    member.d_name = d_name
+    member.d_id = d_id
+    member.phone = phone
+    member.age = age
+    member.email = email
+    member.gender = gender
+    member.specialization = specialization
+    member.experience = experience
+    member.save()
+    return HttpResponseRedirect(reverse('allDoctor'))

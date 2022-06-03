@@ -79,8 +79,12 @@
                 <td>{{item.gender}}</td>
                 <td>{{item.dob}}</td>
                 <td>
-                  <a href="{% url 'deleteStudent' item.regNo %}">Delete</a>
-                  <a href="{% url 'updateStudent' item.regNo %}">Update</a>
+                  <button class="btn btn-danger">
+                    <a href="{% url 'deleteStudent' item.regNo %}">Delete</a>
+                  </button>
+                  <button class="btn btn-success">
+                    <a href="{% url 'updateStudent' item.regNo %}">Update</a>
+                  </button>
                 </td>
               </tr>
               {% endfor %}
