@@ -9,7 +9,7 @@ class StudentDetails(models.Model):
     address = models.CharField(max_length=100)
     age = models.IntegerField()
     gender = models.CharField( max_length=10)
-    dob = models.DateField()
+    dob = models.DateField(blank=True, null=True)
 
 class DoctorDetails(models.Model):
     d_id=models.IntegerField(unique=True)

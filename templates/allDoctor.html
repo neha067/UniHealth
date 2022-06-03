@@ -42,7 +42,6 @@
                 {% comment %}
                 <th>Availability</th>
                 {% endcomment %}
-                <th>Delete/Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -59,12 +58,6 @@
                   </button>
                   <button class="btn btn-success">
                     <a href="{% url 'updateDoctor' item.d_id %}">Update</a>
-                  </button>
-                </td>
-                {% comment %}
-                <td>
-                  <button class="btn btn-danger">
-                    <a href="{% url 'deleteDoctor' item.d_id %}">Delete</a>
                   </button>
                 </td>
               </tr>
