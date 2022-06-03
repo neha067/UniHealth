@@ -33,19 +33,7 @@
           <table id="tableId" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="no-sort">
-                  <div class="custom-control custom-checkbox">
-                    <input
-                      class="custom-control-input"
-                      type="checkbox"
-                      id="select-all"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="select-all"
-                    ></label>
-                  </div>
-                </th>
+
                 <th>Student ID</th>
                 <th>Student Name</th>
                 <th>Phone</th>
@@ -60,16 +48,6 @@
             <tbody>
               {% for item in all %}
               <tr>
-                <td>
-                  <div class="custom-control custom-checkbox">
-                    <input
-                      class="custom-control-input"
-                      type="checkbox"
-                      id="11"
-                    />
-                    <label class="custom-control-label" for="11"></label>
-                  </div>
-                </td>
                 <td>{{item.regNo}}</td>
                 <td>{{item.s_name}}</td>
                 <td>{{item.s_phone}}</td>
