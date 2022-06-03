@@ -1,3 +1,5 @@
+from operator import mod
+from tkinter import CASCADE, PROJECTING
 from django.db import models
 
 class StudentDetails(models.Model):
@@ -20,7 +22,3 @@ class DoctorDetails(models.Model):
     email = models.EmailField()
     gender = models.CharField( max_length=10)
     age = models.IntegerField()
-
-
-
-
