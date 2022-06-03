@@ -98,7 +98,6 @@ def allDoctor(request):
     return render(request,'allDoctor.html',{'all' : all_doc})
 
 def deleteStudent(request,regNo):
-    print(regNo)
     member = StudentDetails.objects.get(regNo=regNo)
     member.delete()
     return render(request,'allStudent.html')

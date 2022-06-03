@@ -28,16 +28,16 @@
     // scroll to top End
 
     // theme color change
-    var theme_settings = $(".theme-settings").find(".theme-color");
-    theme_settings.on('click', function () {
-        var val = $(this).attr('data-color');
-        $('#style_theme').attr('href', 'css/' + val + '.css');
-        $(".logo-change").attr('src', 'img/logo-' + val + '.png');
+    // var theme_settings = $(".theme-settings").find(".theme-color");
+    // theme_settings.on('click', function () {
+    //     var val = $(this).attr('data-color');
+    //     $('#style_theme').attr('href', 'css/' + val + '.css');
+    //     $(".logo-change").attr('src', 'img/logo-' + val + '.png');
 
-        theme_settings.removeClass('theme-active');
-        theme_settings.addClass('theme-active');
-        return false;
-    });
+    //     theme_settings.removeClass('theme-active');
+    //     theme_settings.addClass('theme-active');
+    //     return false;
+    // });
     $(".theme-click").on('click', function () {
         $("#switcher").toggleClass("active");
         return false;
