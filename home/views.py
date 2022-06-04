@@ -171,3 +171,4 @@ def updateDrecord(request, d_id):
     member.experience = experience
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
+
