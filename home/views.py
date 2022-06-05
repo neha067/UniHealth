@@ -12,7 +12,8 @@ from .models import DoctorDetails, StudentDetails
 from django.template import loader
 def index(request):
     c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
-    return render(request,'index.html',{'s_count':c})
+    all_doc_index = DoctorDetails.objects.all
+    return render(request,'index.html',{'s_count':c,'allIndex' : all_doc_index})
 # Create your views here.
 
 def signin(request):
@@ -100,6 +101,11 @@ def allDoctor(request):
     all_doc = DoctorDetails.objects.all
     return render(request,'allDoctor.html',{'all' : all_doc})
 
+# for index all doctors
+# def allDoctorIndex(request):
+#     all_doc_index = DoctorDetails.objects.all
+#     return render(request,'index.html',{'allIndex' : all_doc_index})
+
 def deleteStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
     member.delete()
@@ -160,6 +166,7 @@ def updateDrecord(request, d_id):
     gender = request.POST['gender']
     experience = request.POST['experience']
     email = request.POST['email']
+    available = request.POST['available']
     member = DoctorDetails.objects.get(d_id=d_id)
     member.d_name = d_name
     member.d_id = d_id
@@ -169,5 +176,6 @@ def updateDrecord(request, d_id):
     member.gender = gender
     member.specialization = specialization
     member.experience = experience
+    member.available = available    
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))

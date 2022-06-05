@@ -38,10 +38,8 @@
                 <th>Experience <small>(in Years)</small></th>
                 <th>Phone</th>
                 <th>Specialization</th>
-                <th>Delete/Edit</th>
-                {% comment %}
                 <th>Availability</th>
-                {% endcomment %}
+                <th>Delete/Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +50,7 @@
                 <td>{{item.experience}}</td>
                 <td>{{item.phone}}</td>
                 <td>{{item.specialization}}</td>
+                <td>{{item.available}}</td>
                 <td>
                   <button class="btn btn-danger">
                     <a href="{% url 'deleteDoctor' item.d_id %}">Delete</a>
