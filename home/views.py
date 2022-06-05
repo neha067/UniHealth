@@ -11,8 +11,8 @@ from .forms import StudentForm,DoctorForm
 from .models import DoctorDetails, StudentDetails
 from django.template import loader
 def index(request):
-    
-    return render(request,'index.html')
+    c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
+    return render(request,'index.html',{'s_count':c})
 # Create your views here.
 
 def signin(request):
