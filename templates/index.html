@@ -195,36 +195,27 @@
                 <th>Availability</th>
               </tr>
             </thead>
+            {% for item in allIndex %}
             <tbody>
               <tr>
-                <td>Rajesh</td>
-                <td>Dental</td>
+                <td>{{item.d_name}}</td>
+                <td>{{item.specialization}}</td>
+                {% if item.available == 'Available' %}
                 <td>
-                  <span class="badge badge-success">Available</span>
+                  <span class="badge badge-success">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Riya</td>
-                <td>Ortho</td>
+                {% elif item.availabe == 'Not Available' %}
                 <td>
-                  <span class="badge badge-warning">On Leave</span>
+                  <span class="badge badge-danger">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Siri</td>
-                <td>Skin</td>
+                {% else %}
                 <td>
-                  <span class="badge badge-danger">Not Available</span>
+                  <span class="badge badge-warning">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Rajesh</td>
-                <td>Dental</td>
-                <td>
-                  <span class="badge badge-success">Available</span>
-                </td>
+                {% endif %}
               </tr>
             </tbody>
+            {% endfor %}
           </table>
         </div>
       </div>
