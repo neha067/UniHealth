@@ -18,4 +18,5 @@ urlpatterns = [    #URL dispatching.....
     path('updateStudent/updaterecord/<int:regNo>', views.updaterecord, name='updaterecord'),
     path('updateDoctor/<int:d_id>',views.updateDoctor, name= 'updateDoctor'),
     path('updateDoctor/updateDrecord/<int:d_id>', views.updateDrecord, name='updateDrecord'),
+    path('addAppointment',views.addAppointment, name='addAppointment')
 ]

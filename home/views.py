@@ -7,8 +7,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
-from .forms import StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails
+from .forms import AppointmentForm, StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails 
+
+# availableDocs, specialist
 from django.template import loader
 def index(request):
     
@@ -172,3 +174,33 @@ def updateDrecord(request, d_id):
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
 
+# def addAppointment(request):
+#     if request.method =="POST":
+#         form = DoctorForm(request.POST or None)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,'Doctor added successfully !')
+#         else:
+#             messages.error(request,'Enter valid details !')
+#         return render(request,'addDoctor.html')
+#     else:
+#         return render(request,'addDoctor.html')
+
+# def availableDoctors(request):
+#     return 
+
+def addAppointment(request):
+    docName = DoctorDetails.objects.all()
+    if request.method =='POST':
+        form = AppointmentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Appointment added successfully !')
+        else:
+            messages.error(request,'Enter valid details !')
+        return render(request,'addAppointment.html',{"docName":docName})
+    else:
+        return render(request,'addAppointment.html',{"docName":docName})
+    # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+    # else:
+    #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
