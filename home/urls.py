@@ -10,10 +10,13 @@ urlpatterns = [    #URL dispatching.....
     path('addDoctor',views.addDoctor, name= 'addDoctor'),
     path('allStudent',views.allStudent, name= 'allStudent'),
     path('allDoctor',views.allDoctor, name= 'allDoctor'),
+    
+    # all doctor index
+    #path('index',views.allDoctorIndex, name= 'allDoctorIndex'),
+# hhhh
     path('editStudent',views.editStudent, name= 'editStudent'),
     path('deleteStudent/<int:d_id>',views.deleteStudent, name= 'deleteStudent'),
     path('deleteDoctor/<int:d_id>',views.deleteDoctor, name= 'deleteDoctor'),
-    
     path('updateStudent/<int:regNo>',views.updateStudent, name= 'updateStudent'),
     path('updateStudent/updaterecord/<int:regNo>', views.updaterecord, name='updaterecord'),
     path('updateDoctor/<int:d_id>',views.updateDoctor, name= 'updateDoctor'),

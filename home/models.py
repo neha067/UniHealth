@@ -22,4 +22,8 @@ class DoctorDetails(models.Model):
     email = models.EmailField()
     gender = models.CharField( max_length=10)
     age = models.IntegerField()
+<<<<<<< HEAD
 
+=======
+    available = models.CharField(max_length=15, default="Available")
+>>>>>>> cff06094ccb16ee6e0b1465bd60edbdbd5b84b21
