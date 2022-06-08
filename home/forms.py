@@ -19,6 +19,6 @@ class AppointmentForm(ModelForm):
         model =  Appointment
         fields=['regNo','deptName','docName','appDate','timeSlot','tokenNo','problem']
     
-    # def __init__(self, *args,**kwargs):
-    #     super().__init__(*args,**kwargs)
-    #     self.fields['docName'].queryset = docName.objects.none()
+    def __init__(self, *args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['docName'].queryset = DoctorDetails.objects.none() #for dynamic field

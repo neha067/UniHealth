@@ -204,3 +204,8 @@ def addAppointment(request):
     # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
     # else:
     #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+
+def loadDoctor(request):
+    specialization = request.GET.get('specialization')
+    availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
+    return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})
