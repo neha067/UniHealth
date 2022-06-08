@@ -39,6 +39,7 @@ class Appointment(models.Model):
     tokenNo = models.AutoField(primary_key=True)
     problem = models.CharField(max_length=200)
     
+
 # class Department(models.Model):
 #     deptName = models.CharField(primary_key=True)
 #     class Meta:
