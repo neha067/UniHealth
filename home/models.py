@@ -1,5 +1,7 @@
+#from lib2to3.pgen2 import token
 from operator import mod
-from tkinter import CASCADE, PROJECTING
+import uuid
+#from tkinter import CASCADE, PROJECTING
 from django.db import models
 
 class StudentDetails(models.Model):
@@ -23,3 +25,18 @@ class DoctorDetails(models.Model):
     gender = models.CharField( max_length=10)
     age = models.IntegerField()
     available = models.CharField(max_length=15, default="Available")
+
+class Appointment(models.Model):
+    student = models.ForeignKey(StudentDetails, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(DoctorDetails, on_delete=models.CASCADE)
+    token = models.UUIDField(primary_key = True,default = uuid.uuid4,editable = False)
+    regNo = models.IntegerField()
+    #d_id = models.IntegerField()
+    specialization= models.CharField(max_length=20)
+    d_name= models.CharField(max_length=20)
+    problem= models.CharField(max_length=100)
+    report = models.CharField(max_length=50,null=True)
+
+    
+
+

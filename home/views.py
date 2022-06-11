@@ -179,3 +179,9 @@ def updateDrecord(request, d_id):
     member.available = available    
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
+
+def addAppointment(request):
+    return render(request,'addAppointment.html')
+
+# def addAppointment(request):
+#     member = DoctorDetails.objects.get(d_id=d_id)
