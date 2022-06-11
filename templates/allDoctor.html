@@ -33,53 +33,32 @@
           <table id="tableId" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="no-sort">
-                  <div class="custom-control custom-checkbox">
-                    <input
-                      class="custom-control-input"
-                      type="checkbox"
-                      id="select-all"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="select-all"
-                    ></label>
-                  </div>
-                </th>
                 <th>Doctor ID</th>
                 <th>Doctor Name</th>
                 <th>Experience <small>(in Years)</small></th>
                 <th>Phone</th>
                 <th>Specialization</th>
-                {% comment %}
                 <th>Availability</th>
-                {% endcomment %}
+                <th>Delete/Edit</th>
               </tr>
             </thead>
             <tbody>
               {% for item in all %}
               <tr>
-                <td>
-                  <div class="custom-control custom-checkbox">
-                    <input
-                      class="custom-control-input"
-                      type="checkbox"
-                      id="1"
-                    />
-                    <label class="custom-control-label" for="1"></label>
-                  </div>
-                </td>
                 <td>{{item.d_id}}</td>
                 <td>{{item.d_name}}</td>
                 <td>{{item.experience}}</td>
                 <td>{{item.phone}}</td>
                 <td>{{item.specialization}}</td>
-
-                {% comment %}
+                <td>{{item.available}}</td>
                 <td>
-                  <span class="badge badge-success">Available</span>
+                  <button class="btn btn-danger">
+                    <a href="{% url 'deleteDoctor' item.d_id %}">Delete</a>
+                  </button>
+                  <button class="btn btn-success">
+                    <a href="{% url 'updateDoctor' item.d_id %}">Update</a>
+                  </button>
                 </td>
-                {% endcomment %}
               </tr>
               {% endfor %}
             </tbody>
@@ -111,12 +90,6 @@
             </ul>
           </nav>
           <!-- /Export links-->
-          <button type="button" class="btn btn-danger mt-3 mb-0">
-            <span class="ti-trash"></span> DELETE
-          </button>
-          <button type="button" class="btn btn-primary mt-3 mb-0">
-            <span class="ti-pencil-alt"></span> EDIT
-          </button>
         </div>
       </div>
     </div>

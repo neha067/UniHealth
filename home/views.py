@@ -2,15 +2,20 @@ from email import message
 from multiprocessing import context
 from django.db import models
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
-from .forms import StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails
+from django.urls import reverse
+from .forms import AppointmentForm, StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails 
+
+# availableDocs, specialist
+from django.template import loader
 def index(request):
-    
-    return render(request,'index.html')
+    c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
+    all_doc_index = DoctorDetails.objects.all
+    return render(request,'index.html',{'s_count':c,'allIndex' : all_doc_index})
 # Create your views here.
 
 def signin(request):
@@ -80,6 +85,9 @@ def addDoctor(request):
         form = DoctorForm(request.POST or None)
         if form.is_valid():
             form.save()
+            messages.success(request,'Doctor added successfully !')
+        else:
+            messages.error(request,'Enter valid details !')
         return render(request,'addDoctor.html')
     else:
         return render(request,'addDoctor.html')
@@ -94,3 +102,122 @@ def allStudent(request):
 def allDoctor(request):
     all_doc = DoctorDetails.objects.all
     return render(request,'allDoctor.html',{'all' : all_doc})
+
+# for index all doctors
+# def allDoctorIndex(request):
+#     all_doc_index = DoctorDetails.objects.all
+#     return render(request,'index.html',{'allIndex' : all_doc_index})
+
+def deleteStudent(request,regNo):
+    member = StudentDetails.objects.get(regNo=regNo)
+    member.delete()
+    return render(request,'allStudent.html')
+
+def deleteDoctor(request,d_id):
+    member = DoctorDetails.objects.get(d_id=d_id)
+    member.delete()
+    return render(request,'allDoctor.html')
+
+
+def updateStudent(request,regNo):
+    member = StudentDetails.objects.get(regNo=regNo)
+    # template = loader.get_template('updateStudent.html')
+    # context = {
+    #     'mymember': member,
+    # }
+    # return HttpResponse(template.render(context, request))
+    return render(request,'updateStudent.html',{'mymember':member})
+
+
+def updateDoctor(request,d_id):
+    member = DoctorDetails.objects.get(d_id=d_id)
+    # template = loader.get_template('updateStudent.html')
+    # context = {
+    #     'mymember': member,
+    # }
+    # return HttpResponse(template.render(context, request))
+    return render(request,'updateDoctor.html',{'mymember':member})
+
+
+def updaterecord(request, regNo):
+    s_name = request.POST['s_name']
+    s_phone = request.POST['s_phone']
+    sregNo = request.POST['regNo']
+    address = request.POST['address']
+    age = request.POST['age']
+    gender = request.POST['gender']
+    dob = request.POST['dob']
+    address = request.POST['address']
+    member = StudentDetails.objects.get(regNo=regNo)
+    member.s_name = s_name
+    member.s_phone = s_phone
+    member.regNo = sregNo
+    member.address = address
+    member.age = age
+    member.gender = gender
+    member.dob = dob
+    member.save()
+    return HttpResponseRedirect(reverse('allStudent'))
+
+def updateDrecord(request, d_id):
+    d_name = request.POST['d_name']
+    phone = request.POST['phone']
+    d_id = request.POST['d_id']
+    specialization = request.POST['specialization']
+    age = request.POST['age']
+    gender = request.POST['gender']
+    experience = request.POST['experience']
+    email = request.POST['email']
+    available = request.POST['available']
+    member = DoctorDetails.objects.get(d_id=d_id)
+    member.d_name = d_name
+    member.d_id = d_id
+    member.phone = phone
+    member.age = age
+    member.email = email
+    member.gender = gender
+    member.specialization = specialization
+    member.experience = experience
+    member.available = available    
+    member.save()
+    return HttpResponseRedirect(reverse('allDoctor'))
+
+# def addAppointment(request):
+#     if request.method =="POST":
+#         form = DoctorForm(request.POST or None)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,'Doctor added successfully !')
+#         else:
+#             messages.error(request,'Enter valid details !')
+#         return render(request,'addDoctor.html')
+#     else:
+#         return render(request,'addDoctor.html')
+
+# def availableDoctors(request):
+#     return 
+
+def addSpecialist(request):
+    return render(request,'addSpecialist.html')
+
+def addAppointment(request,specialist):
+    print("hell0")
+    docName = DoctorDetails.objects.all().distinct(specialist)
+    if request.method =='POST':
+        form = AppointmentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Appointment added successfully !')
+        else:
+            messages.error(request,'Enter valid details !')
+        return render(request,'addAppointment.html',{"docName":docName})
+    else:
+        return render(request,'addSpecialist.html')
+    # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+    # else:
+    #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+
+# def loadDoctor(request):
+#     specialization = request.GET.get('specialization')
+#     availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
+#     return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})

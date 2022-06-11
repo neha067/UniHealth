@@ -30,11 +30,8 @@
           <span class="ti-user"></span>
         </div>
         <div class="widget-right">
-          <h4 class="wiget-title">Patients</h4>
-          <span class="numeric color-red">348</span>
-          <p class="inc-dec mb-0">
-            <span class="ti-angle-up"></span> +20% Increased
-          </p>
+          <h4 class="wiget-title">Students</h4>
+          <span class="numeric color-red">{{s_count}}</span>
         </div>
       </div>
     </div>
@@ -48,9 +45,6 @@
         <div class="widget-right">
           <h4 class="wiget-title">Appointments</h4>
           <span class="numeric color-green">1585</span>
-          <p class="inc-dec mb-0">
-            <span class="ti-angle-down"></span> -15% Decreased
-          </p>
         </div>
       </div>
     </div>
@@ -59,14 +53,12 @@
     <div class="col-md-4">
       <div class="widget-area proclinic-box-shadow color-yellow">
         <div class="widget-left">
-          <span class="ti-money"></span>
+          <span class="ti-user"></span>
         </div>
         <div class="widget-right">
-          <h4 class="wiget-title">Total Revenue</h4>
-          <span class="numeric color-yellow">$7300</span>
-          <p class="inc-dec mb-0">
-            <span class="ti-angle-up"></span> +10% Increased
-          </p>
+          <h4 class="wiget-title">Total Patients</h4>
+          <span class="numeric color-yellow">7300</span>
+          <p class="inc-dec mb-0"></p>
         </div>
       </div>
     </div>
@@ -200,36 +192,27 @@
                 <th>Availability</th>
               </tr>
             </thead>
-            <tbody>
+            {% for item in allIndex %}
+            <tbody class="tbodScroll">
               <tr>
-                <td>Rajesh</td>
-                <td>Dental</td>
+                <td>{{item.d_name}}</td>
+                <td>{{item.specialization}}</td>
+                {% if item.available == 'Available' %}
                 <td>
-                  <span class="badge badge-success">Available</span>
+                  <span class="badge badge-success">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Riya</td>
-                <td>Ortho</td>
+                {% elif item.availabe == 'Not Available' %}
                 <td>
-                  <span class="badge badge-warning">On Leave</span>
+                  <span class="badge badge-danger">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Siri</td>
-                <td>Skin</td>
+                {% else %}
                 <td>
-                  <span class="badge badge-danger">Not Available</span>
+                  <span class="badge badge-warning">{{item.available}}</span>
                 </td>
-              </tr>
-              <tr>
-                <td>Rajesh</td>
-                <td>Dental</td>
-                <td>
-                  <span class="badge badge-success">Available</span>
-                </td>
+                {% endif %}
               </tr>
             </tbody>
+            {% endfor %}
           </table>
         </div>
       </div>
