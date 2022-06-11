@@ -7,8 +7,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
-from .forms import StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails
+from .forms import AppointmentForm, StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails 
+
+# availableDocs, specialist
 from django.template import loader
 def index(request):
     c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
@@ -180,3 +182,42 @@ def updateDrecord(request, d_id):
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
 
+# def addAppointment(request):
+#     if request.method =="POST":
+#         form = DoctorForm(request.POST or None)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,'Doctor added successfully !')
+#         else:
+#             messages.error(request,'Enter valid details !')
+#         return render(request,'addDoctor.html')
+#     else:
+#         return render(request,'addDoctor.html')
+
+# def availableDoctors(request):
+#     return 
+
+def addSpecialist(request):
+    return render(request,'addSpecialist.html')
+
+def addAppointment(request,specialist):
+    print("hell0")
+    docName = DoctorDetails.objects.all().distinct(specialist)
+    if request.method =='POST':
+        form = AppointmentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Appointment added successfully !')
+        else:
+            messages.error(request,'Enter valid details !')
+        return render(request,'addAppointment.html',{"docName":docName})
+    else:
+        return render(request,'addSpecialist.html')
+    # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+    # else:
+    #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
+
+# def loadDoctor(request):
+#     specialization = request.GET.get('specialization')
+#     availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
+#     return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})
