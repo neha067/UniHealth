@@ -1,8 +1,7 @@
-from dataclasses import field
+from dataclasses import field, fields
 from django.forms import ModelForm
-# from django import forms
-from .models import StudentDetails,DoctorDetails
-
+from django import forms
+from .models import Appointment, StudentDetails,DoctorDetails
 class StudentForm(ModelForm):
     class Meta:
         model = StudentDetails
@@ -12,3 +11,8 @@ class DoctorForm(ModelForm):
     class Meta:
         model=DoctorDetails
         fields=['d_id','d_name','specialization','experience','email','phone','gender','age']
+
+class AppointmentForm(ModelForm):
+    class Meta:
+        model =  Appointment
+        fields=['regNo','appDate','docNameSpec','timeSlot','tokenNo','problem']

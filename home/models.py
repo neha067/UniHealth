@@ -7,7 +7,6 @@ class StudentDetails(models.Model):
     s_name = models.CharField(max_length=20)
     s_phone = models.IntegerField()
     s_email = models.EmailField()
-    # s_email = models.CharField(max_length=20)
     address = models.CharField(max_length=100)
     age = models.IntegerField()
     gender = models.CharField( max_length=10)
@@ -23,3 +22,11 @@ class DoctorDetails(models.Model):
     gender = models.CharField( max_length=10)
     age = models.IntegerField()
     available = models.CharField(max_length=15, default="Available")
+
+class Appointment(models.Model):
+    regNo = models.IntegerField()
+    docNameSpec = models.CharField(max_length=200)
+    appDate = models.DateField()
+    timeSlot = models.CharField(max_length=20)
+    tokenNo = models.IntegerField(primary_key=True)
+    problem = models.CharField(max_length=200)

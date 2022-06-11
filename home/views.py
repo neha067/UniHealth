@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
-from .forms import StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails
+from .forms import AppointmentForm, StudentForm,DoctorForm
+from .models import DoctorDetails, StudentDetails, Appointment
 from django.template import loader
 def index(request):
     c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
@@ -101,11 +101,6 @@ def allDoctor(request):
     all_doc = DoctorDetails.objects.all
     return render(request,'allDoctor.html',{'all' : all_doc})
 
-# for index all doctors
-# def allDoctorIndex(request):
-#     all_doc_index = DoctorDetails.objects.all
-#     return render(request,'index.html',{'allIndex' : all_doc_index})
-
 def deleteStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
     member.delete()
@@ -119,21 +114,11 @@ def deleteDoctor(request,d_id):
 
 def updateStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
-    # template = loader.get_template('updateStudent.html')
-    # context = {
-    #     'mymember': member,
-    # }
-    # return HttpResponse(template.render(context, request))
     return render(request,'updateStudent.html',{'mymember':member})
 
 
 def updateDoctor(request,d_id):
     member = DoctorDetails.objects.get(d_id=d_id)
-    # template = loader.get_template('updateStudent.html')
-    # context = {
-    #     'mymember': member,
-    # }
-    # return HttpResponse(template.render(context, request))
     return render(request,'updateDoctor.html',{'mymember':member})
 
 
@@ -179,3 +164,16 @@ def updateDrecord(request, d_id):
     member.available = available    
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
+
+def addAppointment(request):
+    DocName = DoctorDetails.objects.all()
+    if request.method =='POST':
+        form = AppointmentForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Appointment added successfully !')
+        else:
+            messages.error(request,'Enter valid details !')
+        return render(request,'addAppointment.html',{"docName":DocName})
+    else:
+        return render(request,'addAppointment.html',{"docName":DocName})
