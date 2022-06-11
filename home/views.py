@@ -8,9 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
 from .forms import AppointmentForm, StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails 
-
-# availableDocs, specialist
+from .models import DoctorDetails, StudentDetails, Appointment
 from django.template import loader
 def index(request):
     c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
@@ -103,11 +101,6 @@ def allDoctor(request):
     all_doc = DoctorDetails.objects.all
     return render(request,'allDoctor.html',{'all' : all_doc})
 
-# for index all doctors
-# def allDoctorIndex(request):
-#     all_doc_index = DoctorDetails.objects.all
-#     return render(request,'index.html',{'allIndex' : all_doc_index})
-
 def deleteStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
     member.delete()
@@ -121,21 +114,11 @@ def deleteDoctor(request,d_id):
 
 def updateStudent(request,regNo):
     member = StudentDetails.objects.get(regNo=regNo)
-    # template = loader.get_template('updateStudent.html')
-    # context = {
-    #     'mymember': member,
-    # }
-    # return HttpResponse(template.render(context, request))
     return render(request,'updateStudent.html',{'mymember':member})
 
 
 def updateDoctor(request,d_id):
     member = DoctorDetails.objects.get(d_id=d_id)
-    # template = loader.get_template('updateStudent.html')
-    # context = {
-    #     'mymember': member,
-    # }
-    # return HttpResponse(template.render(context, request))
     return render(request,'updateDoctor.html',{'mymember':member})
 
 
@@ -182,27 +165,8 @@ def updateDrecord(request, d_id):
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
 
-# def addAppointment(request):
-#     if request.method =="POST":
-#         form = DoctorForm(request.POST or None)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request,'Doctor added successfully !')
-#         else:
-#             messages.error(request,'Enter valid details !')
-#         return render(request,'addDoctor.html')
-#     else:
-#         return render(request,'addDoctor.html')
-
-# def availableDoctors(request):
-#     return 
-
-def addSpecialist(request):
-    return render(request,'addSpecialist.html')
-
-def addAppointment(request,specialist):
-    print("hell0")
-    docName = DoctorDetails.objects.all().distinct(specialist)
+def addAppointment(request):
+    DocName = DoctorDetails.objects.all()
     if request.method =='POST':
         form = AppointmentForm(request.POST or None)
         if form.is_valid():
@@ -210,14 +174,6 @@ def addAppointment(request,specialist):
             messages.success(request,'Appointment added successfully !')
         else:
             messages.error(request,'Enter valid details !')
-        return render(request,'addAppointment.html',{"docName":docName})
+        return render(request,'addAppointment.html',{"docName":DocName})
     else:
-        return render(request,'addSpecialist.html')
-    # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
-    # else:
-    #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
-
-# def loadDoctor(request):
-#     specialization = request.GET.get('specialization')
-#     availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
-#     return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})
+        return render(request,'addAppointment.html',{"docName":DocName})

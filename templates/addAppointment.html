@@ -30,54 +30,29 @@
 	<div class="col-md-12">
 		<div class="widget-area-2 proclinic-box-shadow">
 			<h3 class="widget-title">Add Appointment</h3>
-			<form method="POST" load-doctor-url="{% url 'ajax_load_doctor' %}" novalidate>
+			<form method="POST" action="/app/addAppointment">
 				{% csrf_token %}
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="patient-name">Patient ID</label>
-						<input type="text" class="form-control" placeholder="Patient ID" id="patient-id">
+						<label for="regNo">Patient ID</label>
+						<input type="text" class="form-control" placeholder="Patient ID" id="regNo">
 					</div>
-					<!-- <div class="form-group col-md-6"> -->
-						<!-- <label for="specialist">Specialist</label> -->
-						<!-- Change here for dropdown list -->
-						<!-- <select name="specialist" class="form-control" id="specialist"> -->
-							<!-- {% for x in docName %}
-							<option value="{{x.specialization}}">{{x.specialization}}
-							</option>
-							{% endfor %} -->
-							<!-- <option value="Allergist">Allergist</option>
-							<option value="Cardiologist">Cardiologist</option>
-							<option value="Dentist">Dentist</option>
-							<option value="Dermatologist">Dermatologist</option>
-							<option value="Gastroenterologist">Gastroenterologist</option>
-							<option value="Internist">Internist</option>
-							<option value="Neurologist">Neurologist</option>
-							<option value="Ophthalmologist">Ophthalmologist</option>
-							<option value="Pediatrician">Pediatrician</option>
-							<option value="Podiatrist">Podiatrist</option>
-							<option value="Psychiatrist">Psychiatrists</option>
-							<option value="Psychologist">Psychologists</option>
-							<option value="Radiologist">Radiologists</option>
-							<option value="Therapist">Therapists</option>
-							<option value="Urologist">Urologist</option>
-						</select>
-					</div> -->
 					<div class="form-group col-md-6">
-						<label for="doctor-name">Doctor Name</label>
-						<select name="docName" class="form-control" id="docName">
+						<label for="appDate">Appointment Date</label>
+						<input type="date" placeholder="appDate" class="form-control" id="appDate">
+					</div>
+					<div class="form-group col-md-12">
+						<label for="docNameSpec">Select doctor</label>
+						<select name="docNameSpec" class="form-control" id="docNameSpec">
 							{% for x in docName %}
-							<option value="{{x.docName}}">{{x.d_name}}
+							<option value="{{docNameSpec}}">{{x.d_name}} ({{x.specialization}})
 							</option>
 							{% endfor %}
 						</select>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="appointment-date">Appointment Date</label>
-						<input type="date" placeholder="Appointment Date" class="form-control" id="appointment-date">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="time-slot">Time Slot</label>
-						<select class="form-control" id="time-slot">
+						<label for="timeSlot">Time Slot</label>
+						<select class="form-control" id="timeSlot">
 							<option>10AM-11AM</option>
 							<option>11AM-12pm</option>
 							<option>12PM-01PM</option>
@@ -90,14 +65,13 @@
 						</select>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="token-number">Token Number <small>(Auto Generated)</small></label>
-						<input type="text" placeholder="Token Number" class="form-control" id="token-number">
+						<label for="tokenNo">Token Number <small>(Auto Generated)</small></label>
+						<input type="text" placeholder="Token Number" class="form-control" id="tokenNo">
 					</div>
 					<div class="form-group col-md-12">
 						<label for="problem">Problem</label>
 						<textarea placeholder="Problem" class="form-control" id="problem" rows="3"></textarea>
-					</div>
-														
+					</div>									
 					<div class="form-check col-md-12 mb-2">
 						<div class="text-left">
 							<div class="custom-control custom-checkbox">
@@ -112,7 +86,22 @@
 				</div>
 			</form>
 			<!-- Alerts-->
-
+			{% for message in messages %}
+			{% if message.tags == 'success' %}
+				<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+				<script>
+					var m = "{{ message }}";
+					swal("Perfect !",m,"success")
+				</script>
+				{% endif %}
+			{% if message.tags == 'error' %}
+				<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+				<script>
+					var m = "{{ message }}";
+					swal("OOPS !",m,"error")
+				</script>
+			{% endif %}
+			{% endfor %}
 			<!-- /Alerts-->
 		</div>
 	</div>

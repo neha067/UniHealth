@@ -8,6 +8,7 @@ urlpatterns = [    #URL dispatching.....
     path('signup',views.signup, name= 'signup'),
     path('addStudent',views.addStudent, name= 'addStudent'),
     path('addDoctor',views.addDoctor, name= 'addDoctor'),
+    path('addAppointment',views.addAppointment, name= 'addAppointment'),
     path('allStudent',views.allStudent, name= 'allStudent'),
     path('allDoctor',views.allDoctor, name= 'allDoctor'),
     
@@ -21,6 +22,5 @@ urlpatterns = [    #URL dispatching.....
     path('updateStudent/updaterecord/<int:regNo>', views.updaterecord, name='updaterecord'),
     path('updateDoctor/<int:d_id>',views.updateDoctor, name= 'updateDoctor'),
     path('updateDoctor/updateDrecord/<int:d_id>', views.updateDrecord, name='updateDrecord'),
-    path('addAppointment/<str:specialization>',views.addAppointment, name='addAppointment'),
-    path('addSpecialist',views.addSpecialist, name='addSpecialist')
+    path('addAppointment',views.addAppointment, name='addAppointment'),
 ]

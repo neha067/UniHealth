@@ -1,9 +1,7 @@
 from dataclasses import field, fields
 from django.forms import ModelForm
-# from django import forms
+from django import forms
 from .models import Appointment, StudentDetails,DoctorDetails
-# , specialist, availableDocs
-
 class StudentForm(ModelForm):
     class Meta:
         model = StudentDetails
@@ -17,8 +15,4 @@ class DoctorForm(ModelForm):
 class AppointmentForm(ModelForm):
     class Meta:
         model =  Appointment
-        fields=['regNo','deptName','docName','appDate','timeSlot','tokenNo','problem']
-    
-    def __init__(self, *args,**kwargs):
-        super().__init__(*args,**kwargs)
-        self.fields['docName'].queryset = DoctorDetails.objects.none() #for dynamic field
+        fields=['regNo','appDate','docNameSpec','timeSlot','tokenNo','problem']
