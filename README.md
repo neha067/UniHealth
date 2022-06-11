@@ -2,12 +2,12 @@
 
 web app in python using django framework
 
-A group project to maintain and track health records of Students staying in University Campus
+A group project to track health records of University students staying in Campus.
 
-Workflow:
+**Original Contributors:**
 
-1. new user sign up completed
-2. login authentication completed (constraint error to be added)
-3. add student completed
-4. extensions added from base
-5. add doctor
+- Sunny Chaware : https://github.com/SunnyChaware
+- Swati Aggarwal : https://github.com/swati57
+- Diwakar Arya : https://github.com/Diwakar38
+- Srijita Sarkar : https://github.com/SrijitaSarkar99
+- Neha Priya Ekka : https://github.com/neha067
