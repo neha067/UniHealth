@@ -189,8 +189,12 @@ def updateDrecord(request, d_id):
 # def availableDoctors(request):
 #     return 
 
-def addAppointment(request):
-    docName = DoctorDetails.objects.all()
+def addSpecialist(request):
+    return render(request,'addSpecialist.html')
+
+def addAppointment(request,specialist):
+    print("hell0")
+    docName = DoctorDetails.objects.all().distinct(specialist)
     if request.method =='POST':
         form = AppointmentForm(request.POST or None)
         if form.is_valid():
@@ -200,12 +204,12 @@ def addAppointment(request):
             messages.error(request,'Enter valid details !')
         return render(request,'addAppointment.html',{"docName":docName})
     else:
-        return render(request,'addAppointment.html',{"docName":docName})
+        return render(request,'addSpecialist.html')
     # return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
     # else:
     #     return render(request, 'addAppointment.html',{"specData":specialistObj},{"avDoc":availableDocsObj})
 
-def loadDoctor(request):
-    specialization = request.GET.get('specialization')
-    availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
-    return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})
+# def loadDoctor(request):
+#     specialization = request.GET.get('specialization')
+#     availableDoctors = DoctorDetails.objects.filter(specialization=specialization)
+#     return render(request, '/templates/addAppointment.html',{'avDoctors':availableDoctors})
