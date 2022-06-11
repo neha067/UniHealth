@@ -180,8 +180,11 @@ def updateDrecord(request, d_id):
     member.save()
     return HttpResponseRedirect(reverse('allDoctor'))
 
-def addAppointment(request):
+def addAppointment(request,specialization):
     return render(request,'addAppointment.html')
+
+def addSpecialist(request):
+    return render(request,'addSpecialist.html')
 
 # def addAppointment(request):
 #     member = DoctorDetails.objects.get(d_id=d_id)
