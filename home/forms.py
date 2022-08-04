@@ -6,7 +6,7 @@ from .models import StudentDetails,DoctorDetails
 class StudentForm(ModelForm):
     class Meta:
         model = StudentDetails
-        fields = ['regNo','s_name','s_phone','s_email','address','age','gender','dob']
+        fields = ['regNo','s_name','s_phone','s_email','address','age','gender','dob','report']
 
 class DoctorForm(ModelForm):
     class Meta:

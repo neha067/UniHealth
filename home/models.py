@@ -12,6 +12,7 @@ class StudentDetails(models.Model):
     age = models.IntegerField()
     gender = models.CharField( max_length=10)
     dob = models.DateField(blank=True, null=True)
+    report = models.CharField(max_length=20,default='')
 
 class DoctorDetails(models.Model):
     d_id=models.IntegerField(unique=True)
@@ -23,3 +24,7 @@ class DoctorDetails(models.Model):
     gender = models.CharField( max_length=10)
     age = models.IntegerField()
     available = models.CharField(max_length=15, default="Available")
+
+class Survey(models.Model):
+    report = models.CharField(max_length=20)
+    freq = models.IntegerField()

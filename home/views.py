@@ -2,20 +2,19 @@ from email import message
 from multiprocessing import context
 from django.db import models
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.urls import reverse
 from .forms import StudentForm,DoctorForm
-from .models import DoctorDetails, StudentDetails
+from .models import DoctorDetails, StudentDetails,Survey
 from django.template import loader
 def index(request):
     c = StudentDetails.objects.all().count() #only student count works, appointment table isn't functional for now .
+    student = StudentDetails.objects.all()
     all_doc_index = DoctorDetails.objects.all
-    return render(request,'index.html',{'s_count':c,'allIndex' : all_doc_index})
-# Create your views here.
-
+    return render(request,'index.html',{'s_count':c,'allIndex' : all_doc_index,'student' : student})
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
